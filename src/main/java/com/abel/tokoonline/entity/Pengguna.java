@@ -15,6 +15,8 @@ public class Pengguna implements Serializable {
     @Id
     private String id;
     private String nama;
+    private String password;
+    private String email;
     private String alamat;
     private String nomorHp;
 
