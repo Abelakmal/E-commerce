@@ -30,13 +30,13 @@ public class PenggunaService {
 
     // untuk membuat pengguna baru
     public Pengguna create(Pengguna pengguna) {
-        if (!StringUtils.hasText(pengguna.getNama())) {
-            throw new BadRequestExeption("nama tidak boleh kosong");
-        }else if(!StringUtils.hasText(pengguna.getAlamat())){
-            throw new BadRequestExeption("alamat tidak boleh kosong");
-        }else if(!StringUtils.hasText(pengguna.getNomorHp())){
-            throw new BadRequestExeption("nomor hp tidak boleh kosong");
-        }
+        // if (!StringUtils.hasText(pengguna.getNama())) {
+        // throw new BadRequestExeption("nama tidak boleh kosong");
+        // }else if(!StringUtils.hasText(pengguna.getAlamat())){
+        // throw new BadRequestExeption("alamat tidak boleh kosong");
+        // }else if(!StringUtils.hasText(pengguna.getNomorHp())){
+        // throw new BadRequestExeption("nomor hp tidak boleh kosong");
+        // }
         return penggunaRepo.save(pengguna);
     }
 
