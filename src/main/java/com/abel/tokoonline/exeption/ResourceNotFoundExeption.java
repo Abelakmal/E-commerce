@@ -1,4 +1,4 @@
-package com.abel.tokoonline.exveption;
+package com.abel.tokoonline.exeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
