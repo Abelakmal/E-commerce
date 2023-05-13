@@ -15,7 +15,7 @@ import com.abel.tokoonline.repository.PenggunaRepo;
 public class PenggunaService {
 
     @Autowired
-    PenggunaRepo penggunaRepo;
+    private PenggunaRepo penggunaRepo;
 
     // untuk menemukan user dengan id
     public Pengguna findById(String id) {
@@ -30,18 +30,35 @@ public class PenggunaService {
 
     // untuk membuat pengguna baru
     public Pengguna create(Pengguna pengguna) {
-        // if (!StringUtils.hasText(pengguna.getNama())) {
-        // throw new BadRequestExeption("nama tidak boleh kosong");
-        // }else if(!StringUtils.hasText(pengguna.getAlamat())){
-        // throw new BadRequestExeption("alamat tidak boleh kosong");
-        // }else if(!StringUtils.hasText(pengguna.getNomorHp())){
-        // throw new BadRequestExeption("nomor hp tidak boleh kosong");
-        // }
+        exitsOrNotEmpty(pengguna);
         return penggunaRepo.save(pengguna);
     }
 
     // untuk menghapus pengguna
     public void deleteById(String id) {
         penggunaRepo.deleteById(id);
+    }
+
+    public void exitsOrNotEmpty(Pengguna pengguna) {
+        if (!StringUtils.hasText(pengguna.getId())) {
+            throw new BadRequestExeption("username tidak boleh kosong");
+        }
+        if (penggunaRepo.existsById(pengguna.getId())) {
+            throw new BadRequestExeption("username " + pengguna.getId() + " sudah terdaftar");
+        }
+        if (!StringUtils.hasText(pengguna.getEmail())) {
+            throw new BadRequestExeption("email harus diisi");
+        }
+        if (penggunaRepo.existsByEmail(pengguna.getEmail())) {
+            throw new BadRequestExeption("email " + pengguna.getEmail() + " sudahterdaftar");
+        }
+        if (!StringUtils.hasText(pengguna.getPassword())) {
+            throw new BadRequestExeption("password tidak boleh kosong");
+        }
+        if (!StringUtils.hasText(pengguna.getNama())) {
+            throw new BadRequestExeption("nama tidak boleh kosong");
+        }
+        // cek data tidak boleh kosong
+
     }
 }

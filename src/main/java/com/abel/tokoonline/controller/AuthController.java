@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.abel.tokoonline.entity.Pengguna;
 import com.abel.tokoonline.model.SignupRequest;
-import com.abel.tokoonline.repository.PenggunaRepo;
+import com.abel.tokoonline.service.PenggunaService;
 
 @RestController
 @RequestMapping("/auth")
@@ -19,7 +19,7 @@ public class AuthController {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    PenggunaRepo penggunaRepo;
+    PenggunaService penggunaService;
 
     @PostMapping("/signup")
     public Pengguna signup(@RequestBody SignupRequest request) {
@@ -29,7 +29,7 @@ public class AuthController {
         pengguna.setEmail(request.getEmail());
         pengguna.setNama(request.getNama());
 
-        Pengguna created = penggunaRepo.save(pengguna);
+        Pengguna created = penggunaService.create(pengguna);
 
         return created;
     }
