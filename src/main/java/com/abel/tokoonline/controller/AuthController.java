@@ -1,6 +1,11 @@
 package com.abel.tokoonline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abel.tokoonline.entity.Pengguna;
+import com.abel.tokoonline.model.JwtRespone;
+import com.abel.tokoonline.model.SigninRequest;
 import com.abel.tokoonline.model.SignupRequest;
+import com.abel.tokoonline.security.jjwt.JwtUtils;
+import com.abel.tokoonline.security.service.UserDetailImpl;
 import com.abel.tokoonline.service.PenggunaService;
 
 @RestController
@@ -16,10 +25,28 @@ import com.abel.tokoonline.service.PenggunaService;
 public class AuthController {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    PenggunaService penggunaService;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PenggunaService penggunaService;
+
+    @Autowired
+    JwtUtils jwtUtils;
+
+    @PostMapping("/signin")
+    public ResponseEntity<JwtRespone> signin(@RequestBody SigninRequest request) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtUtils.generateJwtToken(authentication);
+        UserDetailImpl principal = (UserDetailImpl) authentication.getPrincipal();
+
+        return ResponseEntity.ok()
+                .body(new JwtRespone(token, principal.getUsername(), principal.getEmail()));
+    }
 
     @PostMapping("/signup")
     public Pengguna signup(@RequestBody SignupRequest request) {
