@@ -25,13 +25,13 @@ import com.abel.tokoonline.service.PenggunaService;
 public class AuthController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    AuthenticationManager authenticationManager;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PenggunaService penggunaService;
+    PenggunaService penggunaService;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -55,6 +55,7 @@ public class AuthController {
         pengguna.setPassword(passwordEncoder.encode(request.getPassword()));
         pengguna.setEmail(request.getEmail());
         pengguna.setNama(request.getNama());
+        pengguna.setRoles("user");
 
         Pengguna created = penggunaService.create(pengguna);
 

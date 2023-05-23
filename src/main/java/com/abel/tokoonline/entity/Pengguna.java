@@ -25,6 +25,8 @@ public class Pengguna implements Serializable {
     private String alamat;
     @JsonIgnore
     private String nomorHp;
+    @JsonIgnore
+    private String roles;
 
     public Pengguna(String username) {
         this.id = username;
