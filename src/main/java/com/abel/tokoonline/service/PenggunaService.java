@@ -34,6 +34,16 @@ public class PenggunaService {
         return penggunaRepo.save(pengguna);
     }
 
+    public Pengguna edit(Pengguna pengguna) {
+        if (!StringUtils.hasText(pengguna.getId())) {
+            throw new BadRequestExeption("Usernama tidak boleh kosong");
+        }
+        if (!StringUtils.hasText(pengguna.getEmail())) {
+            throw new BadRequestExeption("Email tidak boleh kosong");
+        }
+        return penggunaRepo.save(pengguna);
+    }
+
     // untuk menghapus pengguna
     public void deleteById(String id) {
         penggunaRepo.deleteById(id);

@@ -17,7 +17,7 @@ public class KategoriService {
 
     public Kategori findById(String id) {
         return kategoriRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundExeption("tidak ditemukan id dengan: " + id));
+                .orElseThrow(() -> new ResourceNotFoundExeption("tidak ditemukan kategori dengan id: " + id));
     }
 
     public List<Kategori> findAll() {
