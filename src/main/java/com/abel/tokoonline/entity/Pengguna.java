@@ -17,9 +17,10 @@ public class Pengguna implements Serializable {
     @Id
     private String id;
     private String nama;
-    // @JsonIgnore
+
+    @JsonIgnore
     private String password;
-    // @JsonIgnore
+    @JsonIgnore
     private String email;
     @JsonIgnore
     private String alamat;
