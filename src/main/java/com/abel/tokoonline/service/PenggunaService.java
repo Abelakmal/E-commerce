@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.abel.tokoonline.entity.Pengguna;
-import com.abel.tokoonline.exeption.BadRequestExeption;
-import com.abel.tokoonline.exeption.ResourceNotFoundExeption;
+import com.abel.tokoonline.model.Pengguna;
 import com.abel.tokoonline.repository.PenggunaRepo;
+import com.abel.tokoonline.validationExeption.BadRequestExeption;
+import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
 
 @Service
 public class PenggunaService {
@@ -30,7 +30,16 @@ public class PenggunaService {
 
     // untuk membuat pengguna baru
     public Pengguna create(Pengguna pengguna) {
-        exitsOrNotEmpty(pengguna);
+        if (penggunaRepo.existsById(pengguna.getId())) {
+            throw new BadRequestExeption("username " + pengguna.getId() + " sudah terdaftar");
+        }
+        if (penggunaRepo.existsByEmail(pengguna.getEmail())) {
+            throw new BadRequestExeption("email " + pengguna.getEmail() + " sudahterdaftar");
+        }
+        if (!StringUtils.hasText(pengguna.getNama())) {
+            throw new BadRequestExeption("nama tidak boleh kosong");
+        }
+
         return penggunaRepo.save(pengguna);
     }
 
@@ -47,28 +56,5 @@ public class PenggunaService {
     // untuk menghapus pengguna
     public void deleteById(String id) {
         penggunaRepo.deleteById(id);
-    }
-
-    public void exitsOrNotEmpty(Pengguna pengguna) {
-        if (!StringUtils.hasText(pengguna.getId())) {
-            throw new BadRequestExeption("username tidak boleh kosong");
-        }
-        if (penggunaRepo.existsById(pengguna.getId())) {
-            throw new BadRequestExeption("username " + pengguna.getId() + " sudah terdaftar");
-        }
-        if (!StringUtils.hasText(pengguna.getEmail())) {
-            throw new BadRequestExeption("email harus diisi");
-        }
-        if (penggunaRepo.existsByEmail(pengguna.getEmail())) {
-            throw new BadRequestExeption("email " + pengguna.getEmail() + " sudahterdaftar");
-        }
-        if (!StringUtils.hasText(pengguna.getPassword())) {
-            throw new BadRequestExeption("password tidak boleh kosong");
-        }
-        if (!StringUtils.hasText(pengguna.getNama())) {
-            throw new BadRequestExeption("nama tidak boleh kosong");
-        }
-        // cek data tidak boleh kosong
-
     }
 }

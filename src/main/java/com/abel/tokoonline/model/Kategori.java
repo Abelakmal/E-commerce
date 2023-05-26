@@ -1,4 +1,4 @@
-package com.abel.tokoonline.entity;
+package com.abel.tokoonline.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.abel.tokoonline.entity;
+package com.abel.tokoonline.model;
 
 import java.io.Serializable;
 
@@ -20,13 +20,13 @@ public class Pengguna implements Serializable {
 
     @JsonIgnore
     private String password;
-    @JsonIgnore
+    // @JsonIgnore
     private String email;
     @JsonIgnore
     private String alamat;
     @JsonIgnore
     private String nomorHp;
-    @JsonIgnore
+    // @JsonIgnore
     private String roles;
 
     public Pengguna(String username) {

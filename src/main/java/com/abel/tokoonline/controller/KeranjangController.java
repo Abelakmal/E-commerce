@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abel.tokoonline.entity.Keranjang;
-import com.abel.tokoonline.model.KeranjangRequest;
+import com.abel.tokoonline.dto.KeranjangRequest;
+import com.abel.tokoonline.model.Keranjang;
 import com.abel.tokoonline.security.service.UserDetailImpl;
 import com.abel.tokoonline.service.KeranjangService;
 

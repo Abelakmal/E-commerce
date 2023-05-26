@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.abel.tokoonline.entity.Keranjang;
-import com.abel.tokoonline.entity.Pengguna;
-import com.abel.tokoonline.entity.Produk;
-import com.abel.tokoonline.exeption.BadRequestExeption;
-import com.abel.tokoonline.exeption.ResourceNotFoundExeption;
+import com.abel.tokoonline.model.Keranjang;
+import com.abel.tokoonline.model.Pengguna;
+import com.abel.tokoonline.model.Produk;
 import com.abel.tokoonline.repository.KeranjangRepo;
 import com.abel.tokoonline.repository.ProdukRepo;
+import com.abel.tokoonline.validationExeption.BadRequestExeption;
+import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
 
 @Service
 public class KeranjangService {

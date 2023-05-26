@@ -1,4 +1,4 @@
-package com.abel.tokoonline.model;
+package com.abel.tokoonline.dto;
 
 import java.io.Serializable;
 

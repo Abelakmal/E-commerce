@@ -1,4 +1,4 @@
-package com.abel.tokoonline.exeption;
+package com.abel.tokoonline.validationExeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

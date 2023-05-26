@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abel.tokoonline.entity.Kategori;
-import com.abel.tokoonline.exeption.ResourceNotFoundExeption;
+import com.abel.tokoonline.model.Kategori;
 import com.abel.tokoonline.repository.KategoriRepo;
+import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
 
 @Service
 public class KategoriService {

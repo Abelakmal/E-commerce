@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abel.tokoonline.entity.Produk;
-import com.abel.tokoonline.exeption.ResourceNotFoundExeption;
+import com.abel.tokoonline.model.Produk;
 import com.abel.tokoonline.repository.ProdukRepo;
+import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
 
 @Service
 public class ProdukService {

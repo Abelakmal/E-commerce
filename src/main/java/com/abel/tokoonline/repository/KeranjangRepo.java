@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.abel.tokoonline.entity.Keranjang;
+import com.abel.tokoonline.model.Keranjang;
 
 public interface KeranjangRepo extends JpaRepository<Keranjang, String> {
 

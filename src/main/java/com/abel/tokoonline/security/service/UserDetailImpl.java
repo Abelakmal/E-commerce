@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import com.abel.tokoonline.entity.Pengguna;
+import com.abel.tokoonline.model.Pengguna;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

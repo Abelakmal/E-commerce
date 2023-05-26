@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abel.tokoonline.entity.Kategori;
+import com.abel.tokoonline.model.Kategori;
 import com.abel.tokoonline.service.KategoriService;
 
 @RestController

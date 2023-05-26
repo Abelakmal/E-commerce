@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abel.tokoonline.entity.Pengguna;
+import com.abel.tokoonline.model.Pengguna;
 import com.abel.tokoonline.service.PenggunaService;
 
 @RestController
