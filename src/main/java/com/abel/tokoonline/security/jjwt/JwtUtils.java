@@ -16,6 +16,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.Getter;
 
 @Component
 public class JwtUtils {
@@ -23,16 +24,29 @@ public class JwtUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${jwt.secret}")
-    private String jwtSecret;
+    private String jwtSecret = "rahasia";
 
     @Value("${jwt.expirationMs}")
     private int jwtExpirationMs;
+
+    // @Value("${jwt.refreshExpirationMs}")
+    private int refreshJwtExpiratinMs = 3600000;
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailImpl principal = (UserDetailImpl) authentication.getPrincipal();
         return Jwts.builder().setSubject((principal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+
+    }
+
+    public String generateRefreshJwtToken(Authentication authentication) {
+        UserDetailImpl principal = (UserDetailImpl) authentication.getPrincipal();
+        return Jwts.builder().setSubject((principal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + refreshJwtExpiratinMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
 
