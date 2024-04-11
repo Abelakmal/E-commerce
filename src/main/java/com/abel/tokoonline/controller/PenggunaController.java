@@ -30,7 +30,7 @@ public class PenggunaController {
     }
 
     @GetMapping("/penggunas/{id}")
-    public Pengguna findById(@PathVariable("id") String id) {
+    public Pengguna findById(@PathVariable String id) {
         return penggunaService.findById(id);
     }
 
@@ -46,7 +46,7 @@ public class PenggunaController {
     }
 
     @DeleteMapping("/penggunas/{id}")
-    public void delete(@PathVariable("id") String id) {
+    public void delete(@PathVariable String id) {
         penggunaService.deleteById(id);
     }
 

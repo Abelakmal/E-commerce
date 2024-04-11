@@ -39,13 +39,13 @@ public class KeranjangController {
     }
 
     @PatchMapping("/keranjangs/{produkId}")
-    public Keranjang update(@AuthenticationPrincipal UserDetailImpl user, @PathVariable("produkId") String produkId,
-            @RequestParam("kuantitas") Double kuantitas) {
+    public Keranjang update(@AuthenticationPrincipal UserDetailImpl user, @PathVariable String produkId,
+            @RequestParam Double kuantitas) {
         return keranjangService.ubahKuantitas(user.getUsername(), produkId, kuantitas);
     }
 
     @DeleteMapping("/keranjangs/{produkId}")
-    public void delete(@AuthenticationPrincipal UserDetailImpl user, @PathVariable("produkId") String produkId) {
+    public void delete(@AuthenticationPrincipal UserDetailImpl user, @PathVariable String produkId) {
         keranjangService.delete(user.getUsername(), produkId);
     }
 }

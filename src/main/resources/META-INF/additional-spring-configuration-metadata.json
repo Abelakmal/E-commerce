@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "spring.jaxb.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jaxb.enabled'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.refreshExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.refreshExpirationMs'"
+  },
+  {
+    "name": "jwt.expirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expirationMs'"
+  },
+  {
+    "name": "jwt.refreshExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.refreshExpirationMs'"
+  },
+  {
+    "name": "jwt.expirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expirationMs'"
+  }
+]}
