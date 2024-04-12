@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abel.tokoonline.dto.PenggunaRespone;
 import com.abel.tokoonline.model.Pengguna;
 import com.abel.tokoonline.service.PenggunaService;
 
@@ -30,13 +31,12 @@ public class PenggunaController {
     }
 
     @GetMapping("/penggunas/{id}")
-    public Pengguna findById(@PathVariable String id) {
+    public Pengguna findById(@PathVariable("id") String id) {
         return penggunaService.findById(id);
     }
 
     @PostMapping("/penggunas")
-    public Pengguna create(@RequestBody Pengguna pengguna) {
-
+    public PenggunaRespone create(@RequestBody Pengguna pengguna) {
         return penggunaService.create(pengguna);
     }
 
@@ -46,7 +46,7 @@ public class PenggunaController {
     }
 
     @DeleteMapping("/penggunas/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable("id") String id) {
         penggunaService.deleteById(id);
     }
 

@@ -30,7 +30,7 @@ public class KategoriController {
     }
 
     @GetMapping("/kategoris/{id}")
-    public Kategori findByid(@PathVariable String id) {
+    public Kategori findByid(@PathVariable("id") String id) {
         return kategoriService.findById(id);
     }
 
@@ -45,7 +45,7 @@ public class KategoriController {
     }
 
     @DeleteMapping("/kategoris/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable("id") String id) {
         kategoriService.deleteById(id);
     }
 

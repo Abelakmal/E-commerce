@@ -29,8 +29,8 @@ public class WebSecurityConfig {
         http.cors(Customizer.withDefaults()).csrf(crsf -> crsf.disable())
                 .exceptionHandling(handling -> handling.authenticationEntryPoint(authEntryPointJwt()))
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(requests -> requests.requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/api/**").permitAll().anyRequest().authenticated());
+                .authorizeHttpRequests().requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/api/**").permitAll().anyRequest().authenticated();
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

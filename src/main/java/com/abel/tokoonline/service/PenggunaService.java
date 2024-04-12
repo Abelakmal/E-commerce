@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.abel.tokoonline.dto.PenggunaRespone;
 import com.abel.tokoonline.model.Pengguna;
 import com.abel.tokoonline.repository.PenggunaRepo;
 import com.abel.tokoonline.validationExeption.BadRequestExeption;
@@ -29,18 +30,28 @@ public class PenggunaService {
     }
 
     // untuk membuat pengguna baru
-    public Pengguna create(Pengguna pengguna) {
+    public PenggunaRespone create(Pengguna pengguna) {
+        PenggunaRespone respone = new PenggunaRespone();
         if (penggunaRepo.existsById(pengguna.getId())) {
-            throw new BadRequestExeption("username " + pengguna.getId() + " sudah terdaftar");
+            respone.setMessage("username " + pengguna.getId() + " sudah terdaftar");
+            respone.setStatus(400);
+            return respone;
+
         }
         if (penggunaRepo.existsByEmail(pengguna.getEmail())) {
-            throw new BadRequestExeption("email " + pengguna.getEmail() + " sudahterdaftar");
+            respone.setMessage("email " + pengguna.getEmail() + " sudahterdaftar");
+            respone.setStatus(400);
+            return respone;
         }
         if (!StringUtils.hasText(pengguna.getNama())) {
-            throw new BadRequestExeption("nama tidak boleh kosong");
+            respone.setMessage("nama tidak boleh kosong");
+            respone.setStatus(400);
         }
 
-        return penggunaRepo.save(pengguna);
+        penggunaRepo.save(pengguna);
+        respone.setMessage("Success Create User");
+        respone.setStatus(200);
+        return respone;
     }
 
     public Pengguna edit(Pengguna pengguna) {

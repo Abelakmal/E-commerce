@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abel.tokoonline.dto.JwtRespone;
+import com.abel.tokoonline.dto.PenggunaRespone;
 import com.abel.tokoonline.dto.RefreshTokenRequest;
 import com.abel.tokoonline.dto.SigninRequest;
 import com.abel.tokoonline.dto.SignupRequest;
@@ -59,8 +60,9 @@ public class AuthController {
                 .body(new JwtRespone(token, refreshtToken, principal.getUsername(), principal.getEmail()));
     }
 
+
     @PostMapping("/signup")
-    public Pengguna signup(@Valid @RequestBody SignupRequest request) {
+    public ResponseEntity<PenggunaRespone> signup(@Valid @RequestBody SignupRequest request) {
         Pengguna pengguna = new Pengguna();
         pengguna.setId(request.getUsername());
         pengguna.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -68,9 +70,9 @@ public class AuthController {
         pengguna.setNama(request.getNama());
         pengguna.setRoles("user");
 
-        Pengguna created = penggunaService.create(pengguna);
+        PenggunaRespone result = penggunaService.create(pengguna);
 
-        return created;
+        return ResponseEntity.status(HttpStatus.valueOf(result.getStatus())).body(result);
     }
 
     @PostMapping("/refreshToken")
