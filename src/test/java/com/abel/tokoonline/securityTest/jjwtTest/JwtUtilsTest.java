@@ -5,15 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import com.abel.tokoonline.security.jjwt.JwtUtils;
-import com.abel.tokoonline.security.service.UserDetailImpl;
+
+import com.abel.ecommerce.security.jjwt.JwtUtils;
+import com.abel.ecommerce.security.service.UserDetailImpl;
 
 public class JwtUtilsTest {
 
     @Test
     void testGenerateRefreshToken() {
         JwtUtils jwtUtils = new JwtUtils();
-        UserDetailImpl userDetails = new UserDetailImpl("duwdwd", "nife", "wufwfwi", "fhwfwfo", "user");
+        UserDetailImpl userDetails = new UserDetailImpl(1, "nife", "wufwfwi", "fhwfwfo", "user");
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
 
