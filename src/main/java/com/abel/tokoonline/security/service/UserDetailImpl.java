@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -32,7 +32,7 @@ public class UserDetailImpl implements UserDetails {
         this.roles = roles;
     }
 
-    public static UserDetailImpl build(User user) {
+    public static UserDetailImpl build(Users user) {
         return new UserDetailImpl(
                 user.getId(),
                 user.getPassword(),

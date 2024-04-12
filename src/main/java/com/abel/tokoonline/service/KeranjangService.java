@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abel.tokoonline.model.Keranjang;
-import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.model.Users;
 import com.abel.tokoonline.model.Produk;
 import com.abel.tokoonline.repository.KeranjangRepo;
 import com.abel.tokoonline.repository.ProdukRepo;
@@ -34,7 +34,7 @@ public class KeranjangService {
         // jika belum ada maka buat baru
         Produk produk = produkRepo.findById(produkId)
                 .orElseThrow(() -> new ResourceNotFoundExeption("Produk dengan Id: " + produkId + "tidak ditemukan"));
-        Optional<Keranjang> optional = keranjangRepo.findByPenggunaIdAndProdukId(username, produkId);
+        Optional<Keranjang> optional = keranjangRepo.findByUserIdAndProdukId(username, produkId);
         Keranjang keranjang;
         if (optional.isPresent()) {
             keranjang = new Keranjang();
@@ -45,7 +45,7 @@ public class KeranjangService {
             keranjang = new Keranjang();
             keranjang.setId(UUID.randomUUID().toString());
             keranjang.setProduk(produk);
-            keranjang.setUser(new User(username));
+            keranjang.setUser(new Users(username));
             keranjang.setKuantitas(kuantitas);
             keranjang.setHarga(produk.getHarga());
             keranjang.setJumlah(new BigDecimal(produk.getHarga().doubleValue() + kuantitas));
@@ -56,7 +56,7 @@ public class KeranjangService {
 
     @Transactional
     public Keranjang ubahKuantitas(String user, String produkId, Double kuantitas) {
-        Keranjang keranjang = keranjangRepo.findByPenggunaIdAndProdukId(user, produkId)
+        Keranjang keranjang = keranjangRepo.findByUserIdAndProdukId(user, produkId)
                 .orElseThrow(() -> new BadRequestExeption("tidak ditemukan id yang dicari"));
         keranjang.setKuantitas(kuantitas);
         keranjang.setJumlah(new BigDecimal(keranjang.getHarga().doubleValue() * keranjang.getKuantitas()));
@@ -66,7 +66,7 @@ public class KeranjangService {
 
     @Transactional
     public void delete(String username, String produkId) {
-        Keranjang keranjang = keranjangRepo.findByPenggunaIdAndProdukId(username, produkId)
+        Keranjang keranjang = keranjangRepo.findByUserIdAndProdukId(username, produkId)
                 .orElseThrow(() -> new BadRequestExeption("tidak ditemukan username dan produk id yang dicari"));
 
         keranjangRepo.delete(keranjang);
@@ -74,6 +74,6 @@ public class KeranjangService {
 
     @Transactional
     public List<Keranjang> findByPenggunaId(String username) {
-        return keranjangRepo.findByPenggunaId(username);
+        return keranjangRepo.findByUserId(username);
     }
 }

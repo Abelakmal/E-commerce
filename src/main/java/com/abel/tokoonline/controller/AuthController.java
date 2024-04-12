@@ -19,7 +19,7 @@ import com.abel.tokoonline.dto.UserRespone;
 import com.abel.tokoonline.dto.RefreshTokenRequest;
 import com.abel.tokoonline.dto.SigninRequest;
 import com.abel.tokoonline.dto.SignupRequest;
-import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.model.Users;
 import com.abel.tokoonline.security.jjwt.JwtUtils;
 import com.abel.tokoonline.security.service.UserDetailImpl;
 import com.abel.tokoonline.security.service.UserDetailServiceImpl;
@@ -63,7 +63,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserRespone> signup(@Valid @RequestBody SignupRequest request) {
-        User user = new User();
+        Users user = new Users();
         user.setId(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abel.tokoonline.dto.UserRespone;
-import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.model.Users;
 import com.abel.tokoonline.service.UserService;
 
 @RestController
@@ -26,23 +26,23 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/penggunas")
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/penggunas/{id}")
-    public User findById(@PathVariable("id") String id) {
+    public Users findById(@PathVariable("id") String id) {
         return userService.findById(id);
     }
 
     @PostMapping("/penggunas")
-    public UserRespone create(@RequestBody User pengguna) {
-        return userService.create(pengguna);
+    public UserRespone create(@RequestBody Users user) {
+        return userService.create(user);
     }
 
     @PutMapping("/penggunas")
-    public User edit(@RequestBody User pengguna) {
-        return userService.edit(pengguna);
+    public Users edit(@RequestBody Users user) {
+        return userService.edit(user);
     }
 
     @DeleteMapping("/penggunas/{id}")

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-public class User implements Serializable {
+public class Users implements Serializable {
     // data pengguna
     @Id
     private String id;
@@ -29,7 +29,7 @@ public class User implements Serializable {
     // @JsonIgnore
     private String roles;
 
-    public User(String username) {
+    public Users(String username) {
         this.id = username;
     }
 }

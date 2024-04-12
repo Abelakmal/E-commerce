@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.abel.tokoonline.dto.UserRespone;
-import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.model.Users;
 import com.abel.tokoonline.repository.UserRepo;
 import com.abel.tokoonline.validationExeption.BadRequestExeption;
 import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
@@ -19,18 +19,18 @@ public class UserService {
     private UserRepo userRepo;
 
     // untuk menemukan user dengan id
-    public User findById(String id) {
+    public Users findById(String id) {
         return userRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExeption("Tidak ditemukan pengguna dengan id : " + id));
     }
 
     // untuk menampilkan semua pengguna yg ada didalam database
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userRepo.findAll();
     }
 
     // untuk membuat pengguna baru
-    public UserRespone create(User pengguna) {
+    public UserRespone create(Users pengguna) {
         UserRespone respone = new UserRespone();
         if (userRepo.existsById(pengguna.getId())) {
             respone.setMessage("username " + pengguna.getId() + " sudah terdaftar");
@@ -54,7 +54,7 @@ public class UserService {
         return respone;
     }
 
-    public User edit(User pengguna) {
+    public Users edit(Users pengguna) {
         if (!StringUtils.hasText(pengguna.getId())) {
             throw new BadRequestExeption("Usernama tidak boleh kosong");
         }

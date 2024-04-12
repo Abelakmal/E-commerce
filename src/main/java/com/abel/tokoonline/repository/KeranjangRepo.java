@@ -9,8 +9,8 @@ import com.abel.tokoonline.model.Keranjang;
 
 public interface KeranjangRepo extends JpaRepository<Keranjang, String> {
 
-    Optional<Keranjang> findByPenggunaIdAndProdukId(String username, String produkId);
+    Optional<Keranjang> findByUserIdAndProdukId(String username, String produkId);
 
-    List<Keranjang> findByPenggunaId(String username);
+    List<Keranjang> findByUserId(String username);
 
 }
