@@ -12,24 +12,24 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-public class Pengguna implements Serializable {
+public class User implements Serializable {
     // data pengguna
     @Id
     private String id;
-    private String nama;
+    private String name;
 
     @JsonIgnore
     private String password;
     // @JsonIgnore
     private String email;
     @JsonIgnore
-    private String alamat;
+    private String address;
     @JsonIgnore
-    private String nomorHp;
+    private String numberPhone;
     // @JsonIgnore
     private String roles;
 
-    public Pengguna(String username) {
+    public User(String username) {
         this.id = username;
     }
 }

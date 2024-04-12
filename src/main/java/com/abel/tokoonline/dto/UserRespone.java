@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class PenggunaRespone implements Serializable {
+public class UserRespone implements Serializable {
     private String message;
     private int status;
 }

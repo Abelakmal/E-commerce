@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import com.abel.tokoonline.model.Pengguna;
+import com.abel.tokoonline.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -21,24 +21,24 @@ public class UserDetailImpl implements UserDetails {
     @JsonIgnore
     private String password;
     private String email;
-    private String nama;
+    private String name;
     private String roles;
 
-    public UserDetailImpl(String username, String password, String email, String nama, String roles) {
+    public UserDetailImpl(String username, String password, String email, String name, String roles) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.nama = nama;
-        this.nama = roles;
+        this.name = name;
+        this.roles = roles;
     }
 
-    public static UserDetailImpl build(Pengguna pengguna) {
+    public static UserDetailImpl build(User user) {
         return new UserDetailImpl(
-                pengguna.getId(),
-                pengguna.getPassword(),
-                pengguna.getEmail(),
-                pengguna.getNama(),
-                pengguna.getRoles());
+                user.getId(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getName(),
+                user.getRoles());
     }
 
     @Override

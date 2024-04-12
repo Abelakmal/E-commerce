@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abel.tokoonline.dto.PenggunaRespone;
-import com.abel.tokoonline.model.Pengguna;
-import com.abel.tokoonline.service.PenggunaService;
+import com.abel.tokoonline.dto.UserRespone;
+import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.service.UserService;
 
 @RestController
 @RequestMapping("/api")
 @PreAuthorize("isAuthenticated()")
-public class PenggunaController {
+public class UserController {
 
     @Autowired
-    PenggunaService penggunaService;
+    UserService userService;
 
     @GetMapping("/penggunas")
-    public List<Pengguna> findAll() {
-        return penggunaService.findAll();
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
     @GetMapping("/penggunas/{id}")
-    public Pengguna findById(@PathVariable("id") String id) {
-        return penggunaService.findById(id);
+    public User findById(@PathVariable("id") String id) {
+        return userService.findById(id);
     }
 
     @PostMapping("/penggunas")
-    public PenggunaRespone create(@RequestBody Pengguna pengguna) {
-        return penggunaService.create(pengguna);
+    public UserRespone create(@RequestBody User pengguna) {
+        return userService.create(pengguna);
     }
 
     @PutMapping("/penggunas")
-    public Pengguna edit(@RequestBody Pengguna pengguna) {
-        return penggunaService.edit(pengguna);
+    public User edit(@RequestBody User pengguna) {
+        return userService.edit(pengguna);
     }
 
     @DeleteMapping("/penggunas/{id}")
     public void delete(@PathVariable("id") String id) {
-        penggunaService.deleteById(id);
+        userService.deleteById(id);
     }
 
 }

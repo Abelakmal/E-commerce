@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.abel.tokoonline.model.Pengguna;
-import com.abel.tokoonline.repository.PenggunaRepo;
+import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.repository.UserRepo;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    PenggunaRepo penggunaRepo;
+    UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Pengguna pengguna = penggunaRepo.findById(username)
+        User user = userRepo.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException("username " + username + " tidak ditemukan"));
-        return UserDetailImpl.build(pengguna);
+        return UserDetailImpl.build(user);
     }
 
 }

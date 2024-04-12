@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abel.tokoonline.dto.JwtRespone;
-import com.abel.tokoonline.dto.PenggunaRespone;
+import com.abel.tokoonline.dto.UserRespone;
 import com.abel.tokoonline.dto.RefreshTokenRequest;
 import com.abel.tokoonline.dto.SigninRequest;
 import com.abel.tokoonline.dto.SignupRequest;
-import com.abel.tokoonline.model.Pengguna;
+import com.abel.tokoonline.model.User;
 import com.abel.tokoonline.security.jjwt.JwtUtils;
 import com.abel.tokoonline.security.service.UserDetailImpl;
 import com.abel.tokoonline.security.service.UserDetailServiceImpl;
-import com.abel.tokoonline.service.PenggunaService;
+import com.abel.tokoonline.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -39,7 +39,7 @@ public class AuthController {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    PenggunaService penggunaService;
+    UserService userService;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -62,15 +62,15 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<PenggunaRespone> signup(@Valid @RequestBody SignupRequest request) {
-        Pengguna pengguna = new Pengguna();
-        pengguna.setId(request.getUsername());
-        pengguna.setPassword(passwordEncoder.encode(request.getPassword()));
-        pengguna.setEmail(request.getEmail());
-        pengguna.setNama(request.getNama());
-        pengguna.setRoles("user");
+    public ResponseEntity<UserRespone> signup(@Valid @RequestBody SignupRequest request) {
+        User user = new User();
+        user.setId(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setEmail(request.getEmail());
+        user.setName(request.getNama());
+        user.setRoles("user");
 
-        PenggunaRespone result = penggunaService.create(pengguna);
+        UserRespone result = userService.create(user);
 
         return ResponseEntity.status(HttpStatus.valueOf(result.getStatus())).body(result);
     }

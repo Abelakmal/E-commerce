@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abel.tokoonline.model.Keranjang;
-import com.abel.tokoonline.model.Pengguna;
+import com.abel.tokoonline.model.User;
 import com.abel.tokoonline.model.Produk;
 import com.abel.tokoonline.repository.KeranjangRepo;
 import com.abel.tokoonline.repository.ProdukRepo;
@@ -45,7 +45,7 @@ public class KeranjangService {
             keranjang = new Keranjang();
             keranjang.setId(UUID.randomUUID().toString());
             keranjang.setProduk(produk);
-            keranjang.setPengguna(new Pengguna(username));
+            keranjang.setUser(new User(username));
             keranjang.setKuantitas(kuantitas);
             keranjang.setHarga(produk.getHarga());
             keranjang.setJumlah(new BigDecimal(produk.getHarga().doubleValue() + kuantitas));

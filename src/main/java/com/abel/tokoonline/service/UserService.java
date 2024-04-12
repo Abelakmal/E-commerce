@@ -6,66 +6,66 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.abel.tokoonline.dto.PenggunaRespone;
-import com.abel.tokoonline.model.Pengguna;
-import com.abel.tokoonline.repository.PenggunaRepo;
+import com.abel.tokoonline.dto.UserRespone;
+import com.abel.tokoonline.model.User;
+import com.abel.tokoonline.repository.UserRepo;
 import com.abel.tokoonline.validationExeption.BadRequestExeption;
 import com.abel.tokoonline.validationExeption.ResourceNotFoundExeption;
 
 @Service
-public class PenggunaService {
+public class UserService {
 
     @Autowired
-    private PenggunaRepo penggunaRepo;
+    private UserRepo userRepo;
 
     // untuk menemukan user dengan id
-    public Pengguna findById(String id) {
-        return penggunaRepo.findById(id)
+    public User findById(String id) {
+        return userRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExeption("Tidak ditemukan pengguna dengan id : " + id));
     }
 
     // untuk menampilkan semua pengguna yg ada didalam database
-    public List<Pengguna> findAll() {
-        return penggunaRepo.findAll();
+    public List<User> findAll() {
+        return userRepo.findAll();
     }
 
     // untuk membuat pengguna baru
-    public PenggunaRespone create(Pengguna pengguna) {
-        PenggunaRespone respone = new PenggunaRespone();
-        if (penggunaRepo.existsById(pengguna.getId())) {
+    public UserRespone create(User pengguna) {
+        UserRespone respone = new UserRespone();
+        if (userRepo.existsById(pengguna.getId())) {
             respone.setMessage("username " + pengguna.getId() + " sudah terdaftar");
             respone.setStatus(400);
             return respone;
 
         }
-        if (penggunaRepo.existsByEmail(pengguna.getEmail())) {
+        if (userRepo.existsByEmail(pengguna.getEmail())) {
             respone.setMessage("email " + pengguna.getEmail() + " sudahterdaftar");
             respone.setStatus(400);
             return respone;
         }
-        if (!StringUtils.hasText(pengguna.getNama())) {
+        if (!StringUtils.hasText(pengguna.getName())) {
             respone.setMessage("nama tidak boleh kosong");
             respone.setStatus(400);
         }
 
-        penggunaRepo.save(pengguna);
+        userRepo.save(pengguna);
         respone.setMessage("Success Create User");
         respone.setStatus(200);
         return respone;
     }
 
-    public Pengguna edit(Pengguna pengguna) {
+    public User edit(User pengguna) {
         if (!StringUtils.hasText(pengguna.getId())) {
             throw new BadRequestExeption("Usernama tidak boleh kosong");
         }
         if (!StringUtils.hasText(pengguna.getEmail())) {
             throw new BadRequestExeption("Email tidak boleh kosong");
         }
-        return penggunaRepo.save(pengguna);
+        return userRepo.save(pengguna);
     }
 
     // untuk menghapus pengguna
     public void deleteById(String id) {
-        penggunaRepo.deleteById(id);
+        userRepo.deleteById(id);
     }
 }
